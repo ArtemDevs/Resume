@@ -113,15 +113,32 @@ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 var ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 var Hello = /** @class */ (function (_super) {
     __extends(Hello, _super);
-    function Hello() {
-        return _super !== null && _super.apply(this, arguments) || this;
+    function Hello(props) {
+        var _this = _super.call(this, props) || this;
+        _this.state = {
+            display: false
+        };
+        return _this;
     }
+    Hello.prototype.displayWasClicked = function () {
+        this.setState({
+            display: !this.state.display
+        });
+    };
     Hello.prototype.render = function () {
-        return (React.createElement("iframe", { src: "https://resume.creddle.io/embed/394d5ay1cex", width: "850", height: "1100", seamless: true }));
+        var _this = this;
+        return (React.createElement("div", null,
+            React.createElement("h1", null, "Welcome to my Resume!"),
+            this.state.display ?
+                React.createElement("div", null,
+                    React.createElement("iframe", { src: "https://resume.creddle.io/embed/394d5ay1cex", width: "850", height: "1100", seamless: true }))
+                : null,
+            React.createElement("button", { onClick: function () { return _this.displayWasClicked(); } }, "Display the Resume")));
     };
     return Hello;
 }(React.Component));
 exports.Hello = Hello;
+// node_modules\.bin\webpack app.tsx --config webpack-config.js
 ReactDOM.render(React.createElement(Hello, null), document.getElementById('root'));
 
 
